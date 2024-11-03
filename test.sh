@@ -1,6 +1,9 @@
 #!/bin/bash
 
 PROG=./a.out
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+NO_COLOR='\033[0m'
 
 for IN_FILE in tests/*_in.txt ; do
   echo -n $IN_FILE
@@ -8,9 +11,8 @@ for IN_FILE in tests/*_in.txt ; do
   echo $REF_FILE
   $PROG < $IN_FILE > out.txt
   if ! diff $REF_FILE out.txt ; then
-    echo "Failed: $IN_FILE";
-    exit
+    echo -e "${RED}Failed:${NO_COLOR} $IN_FILE";
   else
-    echo "Ok: $IN_FILE";
+    echo -e "${GREEN}Ok:${NO_COLOR} $IN_FILE";
   fi
 done
